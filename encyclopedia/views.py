@@ -70,3 +70,9 @@ def edit_page(request, title):
         "entry": entry,
         "title": title
     })
+
+def random_page(request):
+
+    random_item = random.choice(util.list_entries())
+    print(random_item)
+    return redirect('entry_page', title=random_item)
