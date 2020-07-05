@@ -14,7 +14,6 @@ def index(request):
         entry = util.get_entry(search)
 
         if entry is None:
-
             results = [entry_item for entry_item in list_entries 
                         if search.lower() in entry_item.lower()]
 
