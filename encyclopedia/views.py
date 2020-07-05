@@ -27,3 +27,16 @@ def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": list_entries
     })
+
+def entry_page(request, title):
+    entry = util.get_entry(title)
+    html = markdown2.markdown(entry)
+
+    if entry is None:
+        return HttpResponseNotFound('<h1>Page not found</h1>')
+
+    return render(request, "encyclopedia/entry.html", {
+        "title": title,
+        "entry": html
+    })
+
