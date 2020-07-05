@@ -50,7 +50,7 @@ def new_page(request):
         entries = [x.lower() for x in util.list_entries()]
         matching = [s for s in entries if title.lower() in s]
 
-        if len(matching) > 0:
+        if matching:
             message = "content already exists"
         else:
             util.save_entry(title, content)
@@ -72,7 +72,6 @@ def edit_page(request, title):
     })
 
 def random_page(request):
-
     random_item = random.choice(util.list_entries())
-    print(random_item)
+
     return redirect('entry_page', title=random_item)
