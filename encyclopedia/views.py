@@ -40,3 +40,19 @@ def entry_page(request, title):
         "entry": html
     })
 
+def new_page(request):
+    message = ""
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+
+        entries = [x.lower() for x in util.list_entries()]
+        matching = [s for s in entries if title.lower() in s]
+
+        if len(matching) > 0:
+            message = "content already exists"
+        else:
+            util.save_entry(title, content)
+
+    return render(request, "encyclopedia/new-page.html", {"message": message })
